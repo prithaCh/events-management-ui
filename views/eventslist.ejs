@@ -1,0 +1,66 @@
+<%- include('header.ejs') %>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="container">
+			<h3>Booking events List</h3><br>
+			<ul class="list-group">
+			  <% eventlist.forEach(function(event) { %>
+
+			  <li class="list-group-item">
+				<form action="/update-event" method="POST">
+					<h4><%=event.eventName%></h4>
+					<h4><%=event.eventType%></h4>
+					<p><%=event.description%></p>
+					<p><%=event.place%></p>
+					<p><input id="capacity" name="capacity" value=<%=event.capacity%>></p>
+					<p><input id="eventDate" name="eventDate" type="date" value=<%=event.eventDate.substr(0, 10);%>></p>
+					<input type="hidden" id="eventId" name="eventId" value=<%=event.id%>>
+					<br>
+					<button id="update" name="update" class="btn btn-primary" value="true" type="submit">Update</button>
+					<button id="delete" name="delete" class="btn btn-danger" value="true" type="submit">Delete</button>
+				</form>
+			  </li>
+			  <% }) %>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="col-sm-6">
+		<form action="/add" method="POST">
+			<div class="container mt-3">
+			  <h4>Add New Event</h4><br>
+				<input id="eventName" name="eventName" type="text" class="form-control" placeholder="Event name"></input> <br>
+				<input id="description" name="description" class="form-control" type="text" placeholder="Description"></input> <br>
+				<p><label for="eventType">Event Type: </label>
+					<select id="eventType" name="eventType">
+						<option value="movie">Movie</option>
+						<option value="dance">Dance</option>
+						<option value="concert">Concert</option>
+						<option value="conference">Conference</option>
+						<option value="adventure">Adventure</option>
+						<option value="drama">Drama</option>
+						<option value="sports">Sports</option>
+						<option value="music">Music</option>
+					</select>
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;				
+					<label for="place">Place: </label>
+					<select id="place" name="place">
+						<option value="chennai">Chennai</option>
+						<option value="bangalore">Bangalore</option>
+						<option value="mumbai">Mumbai</option>
+						<option value="kolkata">Kolkata</option>
+						<option value="delhi">Delhi</option>
+						<option value="pune">Pune</option>
+					</select>
+				</p>
+				<input id="capacity" name="capacity" class="form-control" type="text" placeholder="Capacity between 50 to 200"></input><br>
+				<input id="eventDate" name="eventDate" class="form-control" type="date" placeholder="Event date"></input><br>
+				
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary">Add Event</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<%- include('footer.ejs') %>
