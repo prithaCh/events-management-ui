@@ -1,0 +1,25 @@
+<%- include('header.ejs') %>
+<div class="row">
+	<div class="col-sm-9">
+		<div class="container">
+			<h3>User reviews</h3><br>
+			<form action="/feedback" method="POST">
+				<ul class="list-group">
+				  <% reviewslist.forEach(function(review) { %>
+				  <li class="list-group-item">
+						<h4><%=review.eventName%></h4>
+						<h4><%=review.email%></h4>
+						<input type="range" id="rating" name="rating" min="0" max="5" value=<%=review.rating%> readonly>
+						<textarea id="comments" name="comments" rows="4" cols="50" readonly><%=review.comments%></textarea>
+						<input type="hidden" id="reviewId" name="reviewId" value=<%=review.id%>>
+						<br>
+				  </li>
+				  <% }) %>
+				</ul>
+				<br><br>
+				<button id="back" name="back" class="btn btn-primary" value="true" type="submit">Back</button>
+			</form>
+		</div>
+	</div>
+</div>
+<%- include('footer.ejs') %>

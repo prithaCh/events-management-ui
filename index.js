@@ -65,6 +65,7 @@ app.post("/update-event", (req, res) => {
 	let updateClick = req.body.update;
 	let deleteClick = req.body.delete;
 	let bookClick = req.body.book;
+	let feedbackClick = req.body.feedback;
 	let id = req.body.eventId;
 
 	var eventmgmtURL = config.eventMgmtBaseURL + 'event/' + id;
@@ -88,6 +89,12 @@ app.post("/update-event", (req, res) => {
 			req.session.eventName = req.body.eventName;
 			res.redirect("/view-bookings");
 		}
+		
+		if(feedbackClick) {
+			req.session.eventName = req.body.eventName;
+			res.redirect("/view-feedback");
+		}
+		
 	} catch (error) {
 		console.log(error);
 		res.status(400).send("Error during event update / delete");
@@ -211,6 +218,47 @@ app.post("/add-booking", (req, res) => {
 		res.status(400).send("Error while adding a booking");
 	}
 	
+});
+
+// Display user reviews for an event
+app.get("/view-feedback", async (req, res) => {
+	
+	try {
+		
+		var feedbackURL = config.userFeedbackBaseURL + 'feedbackbyevent?eventName=' + encodeURI(req.session.eventName);
+		
+		const reviews = await axios.get(feedbackURL);
+		
+		const reviewslist = reviews.data.map((reviews) => ({
+			id: reviews.id,
+			eventName: reviews.eventName,
+			email: reviews.email,
+			rating: reviews.rating,
+			comments: reviews.comments
+		}));
+		
+		var eventName = req.session.eventName;
+		res.render("reviews", {reviewslist, eventName});
+		
+	} catch (error) {
+		console.log(error);
+		res.status(400).send("Error while getting feedback list");
+	}
+});
+
+//Return to events page
+app.post("/feedback", (req, res) => {
+
+	let backClick = req.body.back;
+	
+	try {
+		if(backClick) {
+			res.redirect("/view-events");
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(400).send("Error during view user reviews");
+	}
 });
 
 app.listen(3000, () => {
