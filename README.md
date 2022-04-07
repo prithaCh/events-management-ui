@@ -11,6 +11,7 @@ This application consumes REST API exposed by the backend micro-services:
 Note: 
  a. Current version of the UI needs user profile to be created on the backend (use 'user profile' API exposed from the backend.
  b. Default password is set to 'booker'. Login verification is in-progress, will be integrated shortly.
+ c. User feedback screen is not currently integrated into the module, related functionality can be tested via backend APIs exposed
 
 # To run the application
 1. Clone the git repository

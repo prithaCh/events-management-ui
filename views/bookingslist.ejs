@@ -1,0 +1,48 @@
+<%- include('header.ejs') %>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="container">
+			<h3>Bookings List</h3><br>
+			<ul class="list-group">
+			  <% bookingslist.forEach(function(booking) { %>
+
+			  <li class="list-group-item">
+				<form action="/update-feedback" method="POST">
+					<h4><%=booking.eventName%></h4>
+					<h4><%=booking.email%></h4>
+					<h4><%=booking.quantity%></h4>
+					<h4><%=booking.bookingDate.substr(0, 10);%></h4>
+					<input type="hidden" id="bookingId" name="bookingId" value=<%=booking.id%>>
+					<br>
+					<button id="delete" name="delete" class="btn btn-danger" value="true" type="submit">Delete Booking</button>
+				</form>
+			  </li>
+			  <% }) %>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="col-sm-6">
+		<form action="/add-booking" method="POST">
+			<div class="container mt-3">
+				<h2><%=eventName%></h2>
+
+				<div>
+					<input id="quantity" name="quantity" class="form-control" type="text" placeholder="Number of tickets"></input><br>
+					<button type="submit" id="add" name="add" class="btn btn-primary" value="true">Book tickets</button>&emsp;&emsp;
+					<button type="submit" id="back" name="back" class="btn btn-danger" value="true">Back</button>
+					<br><br><br>
+					<h4>Add your feedback for this event</h4>
+					<p><label for="rating">Rate your experience on scale: &emsp;</label>
+					<input type="range" id="rating" name="rating" min="0" max="5"></p>
+					<textarea id="comments" name="comments" rows="4" cols="50">Enter your feedback</textarea>
+					<br>
+					<button id="feedback" name="feedback" class="btn btn-primary" value="true" type="submit">Add Feedback</button>
+
+
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<%- include('footer.ejs') %>

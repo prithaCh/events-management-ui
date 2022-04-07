@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-sm-6">
 		<div class="container">
-			<h3>Booking events List</h3><br>
+			<h3>Events List</h3><br>
 			<ul class="list-group">
 			  <% eventlist.forEach(function(event) { %>
 
@@ -15,9 +15,11 @@
 					<p><input id="capacity" name="capacity" value=<%=event.capacity%>></p>
 					<p><input id="eventDate" name="eventDate" type="date" value=<%=event.eventDate.substr(0, 10);%>></p>
 					<input type="hidden" id="eventId" name="eventId" value=<%=event.id%>>
+					<input type="hidden" id="eventName" name="eventName" value="<%=event.eventName%>">
 					<br>
 					<button id="update" name="update" class="btn btn-primary" value="true" type="submit">Update</button>
 					<button id="delete" name="delete" class="btn btn-danger" value="true" type="submit">Delete</button>
+					<button id="book" name="book" class="btn btn-success" value="true" type="submit">Book</button>
 				</form>
 			  </li>
 			  <% }) %>
@@ -26,7 +28,7 @@
 	</div>
 	
 	<div class="col-sm-6">
-		<form action="/add" method="POST">
+		<form action="/add-event" method="POST">
 			<div class="container mt-3">
 			  <h4>Add New Event</h4><br>
 				<input id="eventName" name="eventName" type="text" class="form-control" placeholder="Event name"></input> <br>
@@ -57,7 +59,8 @@
 				<input id="eventDate" name="eventDate" class="form-control" type="date" placeholder="Event date"></input><br>
 				
 				<div class="text-center">
-					<button type="submit" class="btn btn-primary">Add Event</button>
+					<button id="addevent" name="addevent" type="submit" value="true" class="btn btn-primary">Add Event</button>
+					<button id="logout" name="logout" type="submit" value="true" class="btn btn-danger">Logout</button>
 				</div>
 			</div>
 		</form>
