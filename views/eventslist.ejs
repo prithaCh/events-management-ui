@@ -4,7 +4,7 @@
 		<div class="container">
 			<h3>Events List</h3><br>
 			<ul class="list-group">
-			  <% eventlist.forEach(function(event) { %>
+			  <% eventlist.forEach(function(event) { %>		
 
 			  <li class="list-group-item">
 				<form action="/update-event" method="POST">
@@ -61,7 +61,7 @@
 				
 				<div class="text-center">
 					<button id="addevent" name="addevent" type="submit" value="true" class="btn btn-primary">Add Event</button>
-					<button id="logout" name="logout" type="submit" value="true" class="btn btn-danger">Logout</button>
+					<!-- <button id="logout" name="logout" type="submit" value="true" class="btn btn-danger">Logout</button> -->
 				</div>
 			</div>
 		</form>

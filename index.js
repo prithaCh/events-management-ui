@@ -18,8 +18,7 @@ app.get("/", (req, res) => {
 });
 
 //Post to login
-app.post("/login", async (req, res) => {
-	
+app.post("/login", async (req, res) => {	
 	var email = req.body.email;
 	var credentials = req.body.pwd;
 
